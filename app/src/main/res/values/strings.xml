@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">QR Code</string>
+    <string name="app_name">Barcode</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="qr_code">QR Code</string>
+    <string name="email_barcode">Email Barcode</string>
+    <string name="text_barcode">Text Barcode</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="url_barcode">Url Barcode</string>
+    <string name="save_to_gallery">Save to gallery</string>
+    <string name="choose_image">Choose Image</string>
 </resources>

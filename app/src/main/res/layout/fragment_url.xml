@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.detail.UrlFragment">
+
+        <TextView
+            android:id="@+id/url_title_tv"
+            style="@style/title_text_style"
+            android:text="@string/url_barcode" />
+
+        <ImageView
+            android:id="@+id/url_qr_code_iv"
+            style="@style/qr_code_image_view_style"
+            android:contentDescription="@string/qr_code" />
+
+        <TextView
+            android:id="@+id/url_data_tv"
+            tools:text="0123456789"
+            style="@style/data_text_style" />
+
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/save_to_gallery"/>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/cameraFragment">
+
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="me.hanhngo.qrcode.view.camera.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_emailFragment"
+            app:destination="@id/emailFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_otherFragment"
+            app:destination="@id/otherFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_urlFragment"
+            app:destination="@id/urlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="me.hanhngo.qrcode.view.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_emailFragment"
+            app:destination="@id/emailFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_otherFragment"
+            app:destination="@id/otherFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_urlFragment"
+            app:destination="@id/urlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.StudioFragment"
+        android:label="fragment_studio"
+        tools:layout="@layout/fragment_studio" >
+        <action
+            android:id="@+id/action_studioFragment_to_emailFragment"
+            app:destination="@id/emailFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_otherFragment"
+            app:destination="@id/otherFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_urlFragment"
+            app:destination="@id/urlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailFragment"
+        android:name="me.hanhngo.qrcode.view.detail.EmailFragment"
+        android:label="Result Scan"
+        tools:layout="@layout/fragment_email">
+        <argument
+            android:name="email"
+            app:argType="me.hanhngo.qrcode.domain.schema.Email" />
+        <argument
+            android:name="barcodeFormat"
+            app:argType="com.google.zxing.BarcodeFormat" />
+    </fragment>
+    <fragment
+        android:id="@+id/otherFragment"
+        android:name="me.hanhngo.qrcode.view.detail.OtherFragment"
+        android:label="Result Scan"
+        tools:layout="@layout/fragment_other">
+        <argument
+            android:name="text"
+            app:argType="me.hanhngo.qrcode.domain.schema.Other" />
+        <argument
+            android:name="barcodeFormat"
+            app:argType="com.google.zxing.BarcodeFormat" />
+    </fragment>
+    <fragment
+        android:id="@+id/urlFragment"
+        android:name="me.hanhngo.qrcode.view.detail.UrlFragment"
+        android:label="Result Scan" >
+        <argument
+            android:name="url"
+            app:argType="me.hanhngo.qrcode.domain.schema.Url" />
+        <argument
+            android:name="barcodeFormat"
+            app:argType="com.google.zxing.BarcodeFormat" />
+    </fragment>
+</navigation>

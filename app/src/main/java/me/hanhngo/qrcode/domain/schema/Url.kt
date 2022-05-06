@@ -31,6 +31,5 @@ class Url(val url: String) : Schema, Parcelable {
     override val schema: BarcodeSchema
         get() = BarcodeSchema.URL
 
-    override fun toFormattedText(): String = url
     override fun toBarcodeText(): String = url
 }

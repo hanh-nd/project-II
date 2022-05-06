@@ -12,7 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
@@ -53,7 +56,6 @@ class CameraFragment : Fragment() {
     private val barcodeScanner: BarcodeScanner = BarcodeScanning.getClient(options)
 
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var cameraControl: CameraControl
 
 
     private val viewModel: CameraViewModel by viewModels()
@@ -93,7 +95,6 @@ class CameraFragment : Fragment() {
                 requestPermissionLauncher.launch(REQUIRED_PERMISSIONS)
             }
         }, ContextCompat.getMainExecutor(requireContext()))
-
         return binding.root
     }
 
@@ -101,7 +102,6 @@ class CameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         previewView = binding.previewView
         isProcessingBarcode.set(false)
-
         binding.imageChooseBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -285,6 +285,7 @@ class CameraFragment : Fragment() {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

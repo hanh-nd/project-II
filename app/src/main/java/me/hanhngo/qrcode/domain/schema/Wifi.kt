@@ -3,7 +3,6 @@ package me.hanhngo.qrcode.domain.schema
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import me.hanhngo.qrcode.util.extension.appendIfNotNullOrBlank
-import me.hanhngo.qrcode.util.extension.joinToStringNotNullOrBlankWithLineSeparator
 import me.hanhngo.qrcode.util.extension.startsWithIgnoreCase
 import me.hanhngo.qrcode.util.extension.unescape
 import java.util.*
@@ -63,10 +62,6 @@ class Wifi(
 
     override val schema: BarcodeSchema
         get() = BarcodeSchema.WIFI
-
-    override fun toFormattedText(): String {
-        return listOf(name, encryption, password).joinToStringNotNullOrBlankWithLineSeparator()
-    }
 
     override fun toBarcodeText(): String {
         return StringBuilder()

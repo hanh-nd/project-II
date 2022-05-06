@@ -2,7 +2,6 @@ package me.hanhngo.qrcode.domain.schema
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import me.hanhngo.qrcode.util.extension.joinToStringNotNullOrBlankWithLineSeparator
 import me.hanhngo.qrcode.util.extension.removePrefixIgnoreCase
 import me.hanhngo.qrcode.util.extension.startsWithIgnoreCase
 
@@ -27,10 +26,6 @@ class Sms(val phone: String?, val message: String?) : Schema, Parcelable {
                 message = parts.getOrNull(1)
             )
         }
-    }
-
-    override fun toFormattedText(): String {
-        return listOf(phone, message).joinToStringNotNullOrBlankWithLineSeparator()
     }
 
     override fun toBarcodeText(): String {

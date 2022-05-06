@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/historyFragment"
         android:name="me.hanhngo.qrcode.view.history.HistoryFragment"
-        android:label="fragment_history"
+        android:label="HistoryFragment"
         tools:layout="@layout/fragment_history" >
         <action
             android:id="@+id/action_historyFragment_to_emailFragment"
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/studioFragment"
         android:name="me.hanhngo.qrcode.view.studio.StudioFragment"
-        android:label="fragment_studio"
+        android:label="StudioFragment"
         tools:layout="@layout/fragment_studio" >
         <action
             android:id="@+id/action_studioFragment_to_emailFragment"
@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/emailFragment"
         android:name="me.hanhngo.qrcode.view.detail.EmailFragment"
-        android:label="Result Scan"
+        android:label="Email Barcode"
         tools:layout="@layout/fragment_email">
         <argument
             android:name="email"
@@ -65,7 +65,7 @@
     <fragment
         android:id="@+id/otherFragment"
         android:name="me.hanhngo.qrcode.view.detail.OtherFragment"
-        android:label="Result Scan"
+        android:label="Text Barcode"
         tools:layout="@layout/fragment_other">
         <argument
             android:name="text"
@@ -77,7 +77,7 @@
     <fragment
         android:id="@+id/urlFragment"
         android:name="me.hanhngo.qrcode.view.detail.UrlFragment"
-        android:label="Result Scan" >
+        android:label="Url Barcode" >
         <argument
             android:name="url"
             app:argType="me.hanhngo.qrcode.domain.schema.Url" />

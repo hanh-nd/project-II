@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import me.hanhngo.qrcode.databinding.FragmentStudioBinding
+import me.hanhngo.qrcode.util.extension.hideAppbar
+import me.hanhngo.qrcode.util.extension.showAppbar
 
 @AndroidEntryPoint
 class StudioFragment : Fragment() {
@@ -20,6 +22,10 @@ class StudioFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentStudioBinding.inflate(layoutInflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {

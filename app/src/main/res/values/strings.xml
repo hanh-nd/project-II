@@ -8,4 +8,15 @@
     <string name="url_barcode">Url Barcode</string>
     <string name="save_to_gallery">Save to gallery</string>
     <string name="choose_image">Choose Image</string>
+    <string name="email">Email</string>
+    <string name="subject">Subject</string>
+    <string name="body">Body</string>
+    <string name="send_email">Send email</string>
+    <string name="url">Url</string>
+    <string name="open_url">Open url</string>
+    <string name="text">Text</string>
+    <string name="copy_to_clipboard">Copy to clipboard</string>
+    <string name="studio">Studio</string>
+    <string name="camera">Camera</string>
+    <string name="history">History</string>
 </resources>

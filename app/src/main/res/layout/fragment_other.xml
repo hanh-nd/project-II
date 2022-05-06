@@ -6,34 +6,45 @@
 
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".view.detail.OtherFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:id="@+id/text_title_tv"
-            style="@style/title_text_style"
-            android:text="@string/text_barcode" />
+    <LinearLayout
+        style="@style/linear_layout_background_style"
+        android:weightSum="3"
+        tools:context=".view.detail.OtherFragment">
 
         <ImageView
             android:id="@+id/text_qr_code_iv"
             style="@style/qr_code_image_view_style"
+            android:layout_weight="2"
             android:contentDescription="@string/qr_code" />
 
-        <TextView
-            android:id="@+id/text_data_tv"
-            tools:text="0123456789"
-            style="@style/data_text_style" />
+        <LinearLayout
+            style="@style/linear_layout_background_style"
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/save_to_gallery"/>
+            <Button
+                android:id="@+id/save_btn"
+                style="@style/button_center_style"
+
+                android:text="@string/save_to_gallery" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/text" />
+
+
+            <TextView
+                android:id="@+id/text_data_tv"
+                style="@style/data_text_style"
+                android:maxLines="10"
+                tools:text="@tools:sample/lorem/random" />
+
+            <Button
+                android:id="@+id/copy_to_clipboard_btn"
+                style="@style/button_center_style"
+                android:text="@string/copy_to_clipboard" />
+        </LinearLayout>
 
     </LinearLayout>
+
 </layout>

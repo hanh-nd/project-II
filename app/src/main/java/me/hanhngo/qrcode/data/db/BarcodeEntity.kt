@@ -14,7 +14,6 @@ import me.hanhngo.qrcode.domain.schema.BarcodeSchema
 data class BarcodeEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val text: String,
-    val formattedText: String,
     val schema: BarcodeSchema,
     val date: Long,
     val isGenerated: Boolean = false,

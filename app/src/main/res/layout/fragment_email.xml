@@ -7,32 +7,55 @@
     </data>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        style="@style/linear_layout_background_style"
+        android:weightSum="3"
         tools:context=".view.detail.EmailFragment">
-
-        <TextView
-            android:id="@+id/email_title_tv"
-            style="@style/title_text_style"
-            android:text="@string/email_barcode" />
 
         <ImageView
             android:id="@+id/email_qr_code_iv"
             style="@style/qr_code_image_view_style"
+            android:layout_weight="2"
             android:contentDescription="@string/qr_code" />
 
-        <TextView
-            android:id="@+id/email_data_tv"
-            tools:text="0123456789"
-            style="@style/data_text_style" />
+        <LinearLayout style="@style/linear_layout_background_style">
 
-        <Button
-            android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/save_to_gallery"/>
+            <Button
+                android:id="@+id/save_btn"
+                style="@style/button_center_style"
+                android:text="@string/save_to_gallery" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/email" />
+
+            <TextView
+                android:id="@+id/email_data_tv"
+                style="@style/data_text_style"
+                tools:text="hanhdnd@gmail.com" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/subject" />
+
+            <TextView
+                android:id="@+id/subject_data_tv"
+                style="@style/data_text_style"
+                tools:text="This is subject" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/body" />
+
+            <TextView
+                android:id="@+id/body_data_tv"
+                style="@style/data_text_style"
+                tools:text="This is body" />
+
+            <Button
+                android:id="@+id/send_email_btn"
+                style="@style/button_center_style"
+                android:text="@string/send_email" />
+        </LinearLayout>
 
 
     </LinearLayout>

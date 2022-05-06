@@ -25,10 +25,6 @@ class Phone(val phone: String) : Schema, Parcelable {
     override val schema: BarcodeSchema
         get() = BarcodeSchema.PHONE
 
-    override fun toFormattedText(): String {
-        return phone
-    }
-
     override fun toBarcodeText(): String {
         return "$PREFIX$phone"
     }

@@ -1,5 +1,7 @@
 package me.hanhngo.qrcode.view.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,16 +32,28 @@ class EmailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bindUI()
+        setupListener()
+    }
+
+
+    private fun bindUI() {
         try {
             val email = args.email
             val format = args.barcodeFormat
             val bitmap = parseContent(email.toBarcodeText(), format)
 
             binding.emailQrCodeIv.setImageBitmap(bitmap)
-            binding.emailDataTv.text = email.toFormattedText()
+            binding.emailDataTv.text = email.email
+            binding.subjectDataTv.text = email.subject
+            binding.bodyDataTv.text = email.body
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun setupListener() {
+        val email = args.email
 
         binding.saveBtn.setOnClickListener {
             val saveResult = binding.emailQrCodeIv.drawable.toBitmap().save(requireContext())
@@ -49,8 +63,16 @@ class EmailFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
 
+        binding.sendEmailBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO)
+            intent.data = Uri.parse("mailto:")
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email.email))
+            intent.putExtra(Intent.EXTRA_SUBJECT, email.subject)
+            intent.putExtra(Intent.EXTRA_TEXT, email.body)
+            startActivity(Intent.createChooser(intent, "Choose an app to complete."))
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

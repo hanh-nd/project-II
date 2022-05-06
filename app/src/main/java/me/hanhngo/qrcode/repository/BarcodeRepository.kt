@@ -1,14 +1,14 @@
 package me.hanhngo.qrcode.repository
 
 import kotlinx.coroutines.flow.Flow
-import me.hanhngo.qrcode.data.db.BarcodeEntity
 import me.hanhngo.qrcode.data.db.BarcodeDao
+import me.hanhngo.qrcode.data.db.BarcodeEntity
 import javax.inject.Inject
 
 
 class BarcodeRepository @Inject constructor(
     private val barcodeDao: BarcodeDao
-){
+) {
     suspend fun insert(barcodeEntity: BarcodeEntity) {
         barcodeDao.insert(barcodeEntity)
     }

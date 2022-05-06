@@ -106,7 +106,6 @@ fun parseBarcode(barcode: Barcode): BarcodeEntity {
     val schema = parseSchema(barcode.rawValue.toString())
     return BarcodeEntity(
         text = barcode.rawValue.toString(),
-        formattedText = schema.toFormattedText(),
         schema = schema.schema,
         date = System.currentTimeMillis(),
     )
@@ -131,9 +130,10 @@ fun parseFormat(barcode: Barcode): BarcodeFormat {
         Barcode.FORMAT_ITF -> BarcodeFormat.ITF
         Barcode.FORMAT_PDF417 -> BarcodeFormat.PDF_417
         Barcode.FORMAT_QR_CODE -> BarcodeFormat.QR_CODE
-        Barcode.FORMAT_UPC_A ->  BarcodeFormat.UPC_A
+        Barcode.FORMAT_UPC_A -> BarcodeFormat.UPC_A
         Barcode.FORMAT_UPC_E -> BarcodeFormat.UPC_E
 
         else -> throw IllegalArgumentException("Unknown format")
     }
 }
+

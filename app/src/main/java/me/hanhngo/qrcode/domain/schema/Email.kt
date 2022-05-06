@@ -2,10 +2,8 @@ package me.hanhngo.qrcode.domain.schema
 
 import android.net.MailTo
 import android.os.Parcelable
-import com.google.zxing.BarcodeFormat
 import kotlinx.parcelize.Parcelize
 import me.hanhngo.qrcode.util.extension.appendIfNotNullOrBlank
-import me.hanhngo.qrcode.util.extension.joinToStringNotNullOrBlankWithLineSeparator
 import me.hanhngo.qrcode.util.extension.removePrefixIgnoreCase
 import me.hanhngo.qrcode.util.extension.startsWithIgnoreCase
 
@@ -38,22 +36,23 @@ data class Email(
             var subject: String? = null
             var body: String? = null
 
-            text.removePrefixIgnoreCase(MATMSG_SCHEMA_PREFIX).split(MATMSG_SEPARATOR).forEach { part ->
-                if (part.startsWithIgnoreCase(MATMSG_EMAIL_PREFIX)) {
-                    email = part.removePrefixIgnoreCase(MATMSG_EMAIL_PREFIX)
-                    return@forEach
-                }
+            text.removePrefixIgnoreCase(MATMSG_SCHEMA_PREFIX).split(MATMSG_SEPARATOR)
+                .forEach { part ->
+                    if (part.startsWithIgnoreCase(MATMSG_EMAIL_PREFIX)) {
+                        email = part.removePrefixIgnoreCase(MATMSG_EMAIL_PREFIX)
+                        return@forEach
+                    }
 
-                if (part.startsWithIgnoreCase(MATMSG_SUBJECT_PREFIX)) {
-                    subject = part.removePrefixIgnoreCase(MATMSG_SUBJECT_PREFIX)
-                    return@forEach
-                }
+                    if (part.startsWithIgnoreCase(MATMSG_SUBJECT_PREFIX)) {
+                        subject = part.removePrefixIgnoreCase(MATMSG_SUBJECT_PREFIX)
+                        return@forEach
+                    }
 
-                if (part.startsWithIgnoreCase(MATMSG_BODY_PREFIX)) {
-                    body = part.removePrefixIgnoreCase(MATMSG_BODY_PREFIX)
-                    return@forEach
+                    if (part.startsWithIgnoreCase(MATMSG_BODY_PREFIX)) {
+                        body = part.removePrefixIgnoreCase(MATMSG_BODY_PREFIX)
+                        return@forEach
+                    }
                 }
-            }
 
             return Email(email, subject, body)
         }
@@ -71,10 +70,6 @@ data class Email(
 
     override val schema: BarcodeSchema
         get() = BarcodeSchema.EMAIL
-
-    override fun toFormattedText(): String {
-        return listOf(email, subject, body).joinToStringNotNullOrBlankWithLineSeparator()
-    }
 
     override fun toBarcodeText(): String {
         return StringBuilder()

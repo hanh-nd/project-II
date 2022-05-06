@@ -12,6 +12,5 @@ enum class BarcodeSchema {
 
 interface Schema {
     val schema: BarcodeSchema
-    fun toFormattedText(): String
     fun toBarcodeText(): String
 }

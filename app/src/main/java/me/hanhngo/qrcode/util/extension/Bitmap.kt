@@ -6,6 +6,8 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.camera.core.ImageProxy
+import com.google.mlkit.vision.common.InputImage
 import me.hanhngo.qrcode.R
 import java.io.File
 import java.io.FileOutputStream
@@ -80,3 +82,6 @@ private fun createContentValues(): ContentValues {
     return values
 }
 
+fun Bitmap.toInputImage(imageProxy: ImageProxy): InputImage {
+    return InputImage.fromBitmap(this, imageProxy.imageInfo.rotationDegrees)
+}

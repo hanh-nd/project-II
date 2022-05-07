@@ -4,17 +4,21 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.SurfaceHolder
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -27,36 +31,42 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.common.internal.ImageConvertUtils
 import dagger.hilt.android.AndroidEntryPoint
+import me.hanhngo.qrcode.R
 import me.hanhngo.qrcode.databinding.FragmentCameraBinding
 import me.hanhngo.qrcode.domain.schema.Email
 import me.hanhngo.qrcode.domain.schema.Other
 import me.hanhngo.qrcode.domain.schema.Url
+import me.hanhngo.qrcode.util.extension.toInputImage
 import me.hanhngo.qrcode.util.parseBarcode
 import me.hanhngo.qrcode.util.parseFormat
 import me.hanhngo.qrcode.util.parseSchema
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
+import kotlin.math.min
 
 @AndroidEntryPoint
 @androidx.camera.core.ExperimentalGetImage
-class CameraFragment : Fragment() {
+class CameraFragment : Fragment(), SurfaceHolder.Callback {
     private var _binding: FragmentCameraBinding? = null
     private val binding: FragmentCameraBinding get() = _binding!!
 
-    private var previewView: PreviewView? = null
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraSelector: CameraSelector? = null
     private var previewUseCase: Preview? = null
     private var analysisUseCase: ImageAnalysis? = null
-    private var lensFacing = CameraSelector.LENS_FACING_BACK
+
+    private val lensFacing = CameraSelector.LENS_FACING_BACK
     private val options = BarcodeScannerOptions.Builder()
         .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS).build()
     private val barcodeScanner: BarcodeScanner = BarcodeScanning.getClient(options)
 
     private lateinit var cameraExecutor: ExecutorService
 
+    private var previewView: PreviewView? = null
+    private lateinit var holder: SurfaceHolder
 
     private val viewModel: CameraViewModel by viewModels()
     private val isProcessingBarcode: AtomicBoolean = AtomicBoolean(false)
@@ -102,10 +112,20 @@ class CameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         previewView = binding.previewView
         isProcessingBarcode.set(false)
+
+        binding.overlay.apply {
+            setZOrderOnTop(true)
+        }
+
         binding.imageChooseBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             pickImageLauncher.launch(intent)
+        }
+
+        holder = binding.overlay.holder.apply {
+            setFormat(PixelFormat.TRANSLUCENT)
+            addCallback(this@CameraFragment)
         }
     }
 
@@ -151,6 +171,7 @@ class CameraFragment : Fragment() {
     private fun bindAnalyseUseCase() {
         // Note that if you know which format of barcode your app is dealing with,
         // detection will be faster
+
         if (analysisUseCase != null) {
             cameraProvider!!.unbind(analysisUseCase)
         }
@@ -162,7 +183,37 @@ class CameraFragment : Fragment() {
         // Initialize our background executor
         cameraExecutor = Executors.newSingleThreadExecutor()
         analysisUseCase?.setAnalyzer(cameraExecutor) { imageProxy ->
-            processImageProxy(barcodeScanner, imageProxy)
+            if (imageProxy.image == null) {
+                return@setAnalyzer
+            }
+
+            val inputImage = InputImage.fromMediaImage(
+                imageProxy.image!!,
+                imageProxy.imageInfo.rotationDegrees
+            )
+            val bitmap = ImageConvertUtils.getInstance().getUpRightBitmap(inputImage)
+
+            val width = bitmap.width
+            val height = bitmap.height
+
+            var diameter = min(width, height)
+            val offset = (CAMERA_PREVIEW_SIZE * diameter).toInt()
+            diameter -= offset
+
+            val left = (width / 2 - diameter / 3)
+            val top = (height / 2 - diameter / 3)
+            val right = (width / 2 + diameter / 3)
+            val bottom = (height / 2 + diameter / 3)
+
+            val boxHeight = bottom - top
+            val boxWidth = right - left
+
+            val inputBitmap =
+                Bitmap.createBitmap(bitmap, left, top, boxWidth, boxHeight).toInputImage(imageProxy)
+
+            processInputImage(barcodeScanner, inputBitmap) {
+                imageProxy.close()
+            }
         }
         try {
             cameraProvider!!.bindToLifecycle(
@@ -189,18 +240,6 @@ class CameraFragment : Fragment() {
             e.printStackTrace()
         }
 
-    }
-
-    private fun processImageProxy(
-        barcodeScanner: BarcodeScanner,
-        imageProxy: ImageProxy
-    ) {
-        val inputImage =
-            InputImage.fromMediaImage(imageProxy.image!!, imageProxy.imageInfo.rotationDegrees)
-
-        processInputImage(barcodeScanner, inputImage) {
-            imageProxy.close()
-        }
     }
 
     private fun processInputImage(
@@ -259,6 +298,32 @@ class CameraFragment : Fragment() {
         }
     }
 
+    private fun drawFocusRect() {
+        val height = previewView?.height ?: 0
+        val width = previewView?.width ?: 0
+
+        var diameter = min(width, height)
+        val offset = (CAMERA_PREVIEW_SIZE * diameter).toInt()
+        diameter -= offset
+
+        val canvas = holder.lockCanvas()
+
+        val paint = Paint().apply {
+            style = Paint.Style.STROKE
+            color = ContextCompat.getColor(requireContext(), R.color.white)
+            strokeWidth = 5F
+        }
+
+
+        val left = (width / 2 - diameter / 3)
+        val top = (height / 2 - diameter / 3)
+        val right = (width / 2 + diameter / 3)
+        val bottom = (height / 2 + diameter / 3)
+
+        canvas.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), paint)
+        holder.unlockCanvasAndPost(canvas)
+    }
+
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
@@ -295,6 +360,7 @@ class CameraFragment : Fragment() {
 
     companion object {
         private const val PERMISSION_REQUEST_CODE = 10
+        private const val CAMERA_PREVIEW_SIZE = 0.05 // percentage
         private val REQUIRED_PERMISSIONS =
             mutableListOf(
                 Manifest.permission.CAMERA,
@@ -303,5 +369,15 @@ class CameraFragment : Fragment() {
                     add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
             }.toTypedArray()
+    }
+
+    override fun surfaceCreated(p0: SurfaceHolder) {
+    }
+
+    override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
+        drawFocusRect()
+    }
+
+    override fun surfaceDestroyed(p0: SurfaceHolder) {
     }
 }

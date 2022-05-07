@@ -17,4 +17,5 @@ data class BarcodeEntity(
     val schema: BarcodeSchema,
     val date: Long,
     val isGenerated: Boolean = false,
+    val format: BarcodeFormat,
 ) : Parcelable

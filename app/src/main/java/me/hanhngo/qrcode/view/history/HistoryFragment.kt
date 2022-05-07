@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import com.google.zxing.BarcodeFormat
 import dagger.hilt.android.AndroidEntryPoint
 import me.hanhngo.qrcode.adapter.ItemClickListener
 import me.hanhngo.qrcode.databinding.FragmentHistoryBinding
@@ -19,8 +18,6 @@ import me.hanhngo.qrcode.domain.BarcodeItem
 import me.hanhngo.qrcode.domain.schema.Email
 import me.hanhngo.qrcode.domain.schema.Other
 import me.hanhngo.qrcode.domain.schema.Url
-import me.hanhngo.qrcode.util.extension.hideAppbar
-import me.hanhngo.qrcode.util.extension.showAppbar
 import me.hanhngo.qrcode.util.parseSchema
 
 @AndroidEntryPoint
@@ -82,7 +79,7 @@ class HistoryFragment : Fragment() {
 
     private fun onBarcodeItemClick(barcodeItem: BarcodeItem) {
         val schema = parseSchema(barcodeItem.rawValue)
-        val format = BarcodeFormat.QR_CODE
+        val format = barcodeItem.format
         when (schema) {
             is Email -> NavHostFragment.findNavController(this).navigate(
                 HistoryFragmentDirections.actionHistoryFragmentToEmailFragment(schema, format)

@@ -1,6 +1,7 @@
 package me.hanhngo.qrcode.domain
 
 import androidx.annotation.DrawableRes
+import com.google.zxing.BarcodeFormat
 import me.hanhngo.qrcode.R
 import java.time.LocalDateTime
 
@@ -10,5 +11,6 @@ data class BarcodeItem(
     val resId: Int = R.drawable.ic_email,
     val content: String,
     val dateTime: LocalDateTime,
-    val rawValue: String
+    val rawValue: String,
+    val format: BarcodeFormat
 )

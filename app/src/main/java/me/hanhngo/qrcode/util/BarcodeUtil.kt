@@ -104,10 +104,12 @@ fun parseContent(content: String, format: BarcodeFormat = BarcodeFormat.QR_CODE)
 
 fun parseBarcode(barcode: Barcode): BarcodeEntity {
     val schema = parseSchema(barcode.rawValue.toString())
+    val format = parseFormat(barcode)
     return BarcodeEntity(
         text = barcode.rawValue.toString(),
         schema = schema.schema,
         date = System.currentTimeMillis(),
+        format = format
     )
 }
 

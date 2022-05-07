@@ -13,6 +13,7 @@ fun fromBarcodeEntityToBarcodeItem(barcodeEntity: BarcodeEntity): BarcodeItem {
     val resId: Int
     val dateTime = barcodeEntity.date.toLocalDateTime()
     val rawValue = barcodeEntity.text
+    val format = barcodeEntity.format
 
     when (barcodeEntity.schema) {
         BarcodeSchema.EMAIL -> {
@@ -51,7 +52,7 @@ fun fromBarcodeEntityToBarcodeItem(barcodeEntity: BarcodeEntity): BarcodeItem {
             resId = R.drawable.ic_text
         }
     }
-    return BarcodeItem(id, resId, content, dateTime, rawValue)
+    return BarcodeItem(id, resId, content, dateTime, rawValue, format)
 }
 
 fun fromBarcodeEntityListToBarcodeItemList(barcodeEntities: List<BarcodeEntity>): List<BarcodeItem> {

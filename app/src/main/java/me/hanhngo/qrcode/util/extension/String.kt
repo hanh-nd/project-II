@@ -10,26 +10,6 @@ fun String.unescape(): String {
     }
 }
 
-fun String.removeStartAll(symbol: Char): String {
-    var newStart = 0
-
-    run loop@{
-        forEachIndexed { index, c ->
-            if (c == symbol) {
-                newStart = index + 1
-            } else {
-                return@loop
-            }
-        }
-    }
-
-    return if (newStart >= length) {
-        ""
-    } else {
-        substring(newStart)
-    }
-}
-
 fun String.removePrefixIgnoreCase(prefix: String): String {
     return substring(prefix.length)
 }

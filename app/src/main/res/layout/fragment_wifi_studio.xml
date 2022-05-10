@@ -64,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@color/blue"
                 android:text="@string/wpa_wpa2"
                 android:textColor="@color/blue" />
 
@@ -73,6 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@color/blue"
                 android:text="@string/wep"
                 android:textColor="@color/blue" />
 

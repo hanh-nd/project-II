@@ -41,9 +41,4 @@
     <string name="wep">WEP</string>
     <string name="none">None</string>
     <string name="HTTPS">https://</string>
-    <string-array name="one_d_format">
-        <item>CODE_128</item>
-        <item>CODE_93</item>
-        <item>CODE_39</item>
-    </string-array>
 </resources>

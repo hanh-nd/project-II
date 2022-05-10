@@ -1,16 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background_light"
         android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="64dp"
         tools:context=".view.studio.StudioFragment">
 
-    </LinearLayout>
+        <TableRow
+            android:layout_marginVertical="24dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/email_tv"
+                style="@style/studio_item_style"
+                android:text="@string/email"
+                app:drawableTopCompat="@drawable/ic_email" />
+
+            <TextView
+                android:id="@+id/url_tv"
+                style="@style/studio_item_style"
+                android:text="@string/url"
+                app:drawableTopCompat="@drawable/ic_url" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginVertical="24dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/sms_tv"
+                style="@style/studio_item_style"
+                android:text="@string/sms"
+                app:drawableTopCompat="@drawable/ic_sms" />
+
+            <TextView
+                android:id="@+id/phone_tv"
+                style="@style/studio_item_style"
+                android:text="@string/phone"
+                app:drawableTopCompat="@drawable/ic_phone" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginVertical="24dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/wifi_tv"
+                style="@style/studio_item_style"
+                android:text="@string/wifi"
+                app:drawableTopCompat="@drawable/ic_wifi" />
+
+            <TextView
+                android:id="@+id/text_tv"
+                style="@style/studio_item_style"
+                android:text="@string/text"
+                app:drawableTopCompat="@drawable/ic_text" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginVertical="24dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/clipboard_tv"
+                style="@style/studio_item_style"
+                android:text="@string/clipboard"
+                app:drawableTopCompat="@drawable/ic_clipboard" />
+
+            <TextView
+                android:id="@+id/other_1d_tv"
+                style="@style/studio_item_style"
+                android:text="@string/other_1d"
+                app:drawableTopCompat="@drawable/ic_barcode" />
+        </TableRow>
+    </TableLayout>
 </layout>

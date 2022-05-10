@@ -1,5 +1,7 @@
 package me.hanhngo.qrcode.util.extension
 
+import android.util.Patterns
+
 private val escapedRegex = """\\([\\;,":])""".toRegex()
 
 fun String.unescape(): String {
@@ -11,7 +13,7 @@ fun String.unescape(): String {
 fun String.removeStartAll(symbol: Char): String {
     var newStart = 0
 
-    run loop@ {
+    run loop@{
         forEachIndexed { index, c ->
             if (c == symbol) {
                 newStart = index + 1
@@ -43,4 +45,20 @@ fun String.startsWithAnyIgnoreCase(prefixes: List<String>): Boolean {
         }
     }
     return false
+}
+
+fun String.isEmail(): Boolean {
+    return Patterns.EMAIL_ADDRESS.matcher(this).matches()
+}
+
+fun String.isUrl(): Boolean {
+    return Patterns.WEB_URL.matcher(this).matches()
+}
+
+fun String.isPhone(): Boolean {
+    return Patterns.PHONE.matcher(this).matches()
+}
+
+fun String.addPrefixString(string: String): String {
+    return StringBuilder().append(string).append(this).toString()
 }

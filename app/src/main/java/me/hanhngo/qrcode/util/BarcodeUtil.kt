@@ -9,10 +9,7 @@ import com.google.zxing.oned.*
 import com.google.zxing.pdf417.PDF417Writer
 import com.google.zxing.qrcode.QRCodeWriter
 import me.hanhngo.qrcode.data.db.BarcodeEntity
-import me.hanhngo.qrcode.domain.schema.Email
-import me.hanhngo.qrcode.domain.schema.Other
-import me.hanhngo.qrcode.domain.schema.Schema
-import me.hanhngo.qrcode.domain.schema.Url
+import me.hanhngo.qrcode.domain.schema.*
 import me.hanhngo.qrcode.util.extension.toBitmap
 
 fun parseContent(content: String, format: BarcodeFormat = BarcodeFormat.QR_CODE): Bitmap {
@@ -104,7 +101,7 @@ fun parseContent(content: String, format: BarcodeFormat = BarcodeFormat.QR_CODE)
 
 fun parseBarcode(barcode: Barcode): BarcodeEntity {
     val schema = parseSchema(barcode.rawValue.toString())
-    val format = parseFormat(barcode)
+    val format = parseFormat(barcode.format)
     return BarcodeEntity(
         text = barcode.rawValue.toString(),
         schema = schema.schema,
@@ -116,11 +113,14 @@ fun parseBarcode(barcode: Barcode): BarcodeEntity {
 fun parseSchema(text: String): Schema {
     return Email.parse(text)
         ?: Url.parse(text)
+        ?: Phone.parse(text)
+        ?: Sms.parse(text)
+        ?: Wifi.parse(text)
         ?: Other(text)
 }
 
-fun parseFormat(barcode: Barcode): BarcodeFormat {
-    return when (barcode.format) {
+fun parseFormat(format: Int): BarcodeFormat {
+    return when (format) {
         Barcode.FORMAT_AZTEC -> BarcodeFormat.AZTEC
         Barcode.FORMAT_CODABAR -> BarcodeFormat.CODABAR
         Barcode.FORMAT_CODE_39 -> BarcodeFormat.CODE_39
@@ -137,5 +137,9 @@ fun parseFormat(barcode: Barcode): BarcodeFormat {
 
         else -> throw IllegalArgumentException("Unknown format")
     }
+}
+
+fun parseListFormat(formatList: List<Int>): List<BarcodeFormat> {
+    return formatList.map { parseFormat(it) }
 }
 

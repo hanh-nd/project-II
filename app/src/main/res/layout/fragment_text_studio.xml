@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        style="@style/linear_layout_background_style"
+        tools:context=".view.studio.EmailStudioFragment">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/text_input_layout_style"
+            android:hint="@string/text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_studio_et"
+                style="@style/text_input_edittext_style"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/create_btn"
+            style="@style/button_center_style"
+            android:text="@string/create" />
+
+    </LinearLayout>
+</layout>

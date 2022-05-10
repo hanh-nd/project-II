@@ -42,6 +42,7 @@ class OtherFragment : Fragment() {
             val text = args.text
             val format = args.barcodeFormat
             val bitmap = parseContent(text.toBarcodeText(), format)
+
             binding.textQrCodeIv.setImageBitmap(bitmap)
             binding.textDataTv.text = text.text
         } catch (e: Exception) {

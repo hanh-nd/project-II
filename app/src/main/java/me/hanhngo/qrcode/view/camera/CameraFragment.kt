@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.net.Uri
@@ -19,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -35,9 +35,7 @@ import com.google.mlkit.vision.common.internal.ImageConvertUtils
 import dagger.hilt.android.AndroidEntryPoint
 import me.hanhngo.qrcode.R
 import me.hanhngo.qrcode.databinding.FragmentCameraBinding
-import me.hanhngo.qrcode.domain.schema.Email
-import me.hanhngo.qrcode.domain.schema.Other
-import me.hanhngo.qrcode.domain.schema.Url
+import me.hanhngo.qrcode.domain.schema.*
 import me.hanhngo.qrcode.util.extension.toInputImage
 import me.hanhngo.qrcode.util.parseBarcode
 import me.hanhngo.qrcode.util.parseFormat
@@ -182,6 +180,7 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
             .build()
         // Initialize our background executor
         cameraExecutor = Executors.newSingleThreadExecutor()
+
         analysisUseCase?.setAnalyzer(cameraExecutor) { imageProxy ->
             if (imageProxy.image == null) {
                 return@setAnalyzer
@@ -191,30 +190,14 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
                 imageProxy.image!!,
                 imageProxy.imageInfo.rotationDegrees
             )
-            val bitmap = ImageConvertUtils.getInstance().getUpRightBitmap(inputImage)
 
-            val width = bitmap.width
-            val height = bitmap.height
+            val croppedInputImage = cropInputImage(inputImage, imageProxy)
 
-            var diameter = min(width, height)
-            val offset = (CAMERA_PREVIEW_SIZE * diameter).toInt()
-            diameter -= offset
-
-            val left = (width / 2 - diameter / 3)
-            val top = (height / 2 - diameter / 3)
-            val right = (width / 2 + diameter / 3)
-            val bottom = (height / 2 + diameter / 3)
-
-            val boxHeight = bottom - top
-            val boxWidth = right - left
-
-            val inputBitmap =
-                Bitmap.createBitmap(bitmap, left, top, boxWidth, boxHeight).toInputImage(imageProxy)
-
-            processInputImage(barcodeScanner, inputBitmap) {
+            processInputImage(barcodeScanner, croppedInputImage) {
                 imageProxy.close()
             }
         }
+
         try {
             cameraProvider!!.bindToLifecycle(
                 this,
@@ -226,6 +209,27 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
         } catch (illegalArgumentException: IllegalArgumentException) {
             println(illegalArgumentException.message ?: "IllegalArgumentException")
         }
+    }
+
+    private fun cropInputImage(inputImage: InputImage, imageProxy: ImageProxy): InputImage {
+        val bitmap = ImageConvertUtils.getInstance().getUpRightBitmap(inputImage)
+
+        val width = bitmap.width
+        val height = bitmap.height
+
+        var diameter = min(width, height)
+        val offset = (CAMERA_PREVIEW_SIZE * diameter).toInt()
+        diameter -= offset
+
+        val left = (width / 2 - diameter / 3)
+        val top = (height / 2 - diameter / 3)
+        val right = (width / 2 + diameter / 3)
+        val bottom = (height / 2 + diameter / 3)
+
+        val boxHeight = bottom - top
+        val boxWidth = right - left
+
+        return Bitmap.createBitmap(bitmap, left, top, boxWidth, boxHeight).toInputImage(imageProxy)
     }
 
     private fun processImageUri(
@@ -277,7 +281,7 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
     private fun doOnBarcodeScanned(barcode: Barcode) {
         val barcodeEntity = parseBarcode(barcode)
         val schema = parseSchema(barcode.rawValue.toString())
-        val format = parseFormat(barcode)
+        val format = parseFormat(barcode.format)
 
         viewModel.insert(barcodeEntity)
 
@@ -289,6 +293,19 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
             is Url -> NavHostFragment.findNavController(this).navigate(
                 CameraFragmentDirections.actionCameraFragmentToUrlFragment(schema, format)
             )
+
+            is Phone -> NavHostFragment.findNavController(this).navigate(
+                CameraFragmentDirections.actionCameraFragmentToPhoneFragment(schema, format)
+            )
+
+            is Sms -> NavHostFragment.findNavController(this).navigate(
+                CameraFragmentDirections.actionCameraFragmentToSmsFragment(schema, format)
+            )
+
+            is Wifi -> NavHostFragment.findNavController(this).navigate(
+                CameraFragmentDirections.actionCameraFragmentToWifiFragment(schema, format)
+            )
+
             else -> NavHostFragment.findNavController(this).navigate(
                 CameraFragmentDirections.actionCameraFragmentToOtherFragment(
                     schema as Other,

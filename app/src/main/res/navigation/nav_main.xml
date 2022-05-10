@@ -19,6 +19,15 @@
         <action
             android:id="@+id/action_cameraFragment_to_urlFragment"
             app:destination="@id/urlFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_wifiFragment"
+            app:destination="@id/wifiFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_smsFragment"
+            app:destination="@id/smsFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -34,6 +43,15 @@
         <action
             android:id="@+id/action_historyFragment_to_urlFragment"
             app:destination="@id/urlFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_wifiFragment"
+            app:destination="@id/wifiFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_smsFragment"
+            app:destination="@id/smsFragment" />
     </fragment>
     <fragment
         android:id="@+id/studioFragment"
@@ -41,14 +59,29 @@
         android:label="Studio"
         tools:layout="@layout/fragment_studio" >
         <action
-            android:id="@+id/action_studioFragment_to_emailFragment"
-            app:destination="@id/emailFragment" />
+            android:id="@+id/action_studioFragment_to_emailStudioFragment"
+            app:destination="@id/emailStudioFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_phoneStudioFragment"
+            app:destination="@id/phoneStudioFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_smsStudioFragment"
+            app:destination="@id/smsStudioFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_textStudioFragment"
+            app:destination="@id/textStudioFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_urlStudioFragment"
+            app:destination="@id/urlStudioFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_wifiStudioFragment"
+            app:destination="@id/wifiStudioFragment" />
         <action
             android:id="@+id/action_studioFragment_to_otherFragment"
             app:destination="@id/otherFragment" />
         <action
-            android:id="@+id/action_studioFragment_to_urlFragment"
-            app:destination="@id/urlFragment" />
+            android:id="@+id/action_studioFragment_to_otherOneDStudioFragment"
+            app:destination="@id/otherOneDStudioFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailFragment"
@@ -84,5 +117,108 @@
         <argument
             android:name="barcodeFormat"
             app:argType="com.google.zxing.BarcodeFormat" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneFragment"
+        android:name="me.hanhngo.qrcode.view.detail.PhoneFragment"
+        android:label="Phone Barcode" >
+        <argument
+            android:name="phone"
+            app:argType="me.hanhngo.qrcode.domain.schema.Phone" />
+        <argument
+            android:name="barcodeFormat"
+            app:argType="com.google.zxing.BarcodeFormat" />
+    </fragment>
+    <fragment
+        android:id="@+id/smsFragment"
+        android:name="me.hanhngo.qrcode.view.detail.SmsFragment"
+        android:label="Sms Barcode" >
+        <argument
+            android:name="sms"
+            app:argType="me.hanhngo.qrcode.domain.schema.Sms" />
+        <argument
+            android:name="barcodeFormat"
+            app:argType="com.google.zxing.BarcodeFormat" />
+    </fragment>
+    <fragment
+        android:id="@+id/wifiFragment"
+        android:name="me.hanhngo.qrcode.view.detail.WifiFragment"
+        android:label="Wifi Barcode" >
+        <argument
+            android:name="wifi"
+            app:argType="me.hanhngo.qrcode.domain.schema.Wifi" />
+        <argument
+            android:name="barcodeFormat"
+            app:argType="com.google.zxing.BarcodeFormat" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailStudioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.EmailStudioFragment"
+        android:label="Email Studio" >
+        <action
+            android:id="@+id/action_emailStudioFragment_to_emailFragment"
+            app:destination="@id/emailFragment"
+            app:popUpTo="@id/emailStudioFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneStudioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.PhoneStudioFragment"
+        android:label="Phone Studio" >
+        <action
+            android:id="@+id/action_phoneStudioFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment"
+            app:popUpTo="@id/phoneStudioFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/smsStudioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.SmsStudioFragment"
+        android:label="Sms Studio" >
+        <action
+            android:id="@+id/action_smsStudioFragment_to_smsFragment"
+            app:destination="@id/smsFragment"
+            app:popUpTo="@id/smsStudioFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/textStudioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.TextStudioFragment"
+        android:label="Text Studio" >
+        <action
+            android:id="@+id/action_textStudioFragment_to_otherFragment"
+            app:destination="@id/otherFragment"
+            app:popUpTo="@id/textStudioFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/urlStudioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.UrlStudioFragment"
+        android:label="Url Studio" >
+        <action
+            android:id="@+id/action_urlStudioFragment_to_urlFragment"
+            app:destination="@id/urlFragment"
+            app:popUpTo="@id/urlStudioFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/wifiStudioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.WifiStudioFragment"
+        android:label="Wifi Studio" >
+        <action
+            android:id="@+id/action_wifiStudioFragment_to_wifiFragment"
+            app:destination="@id/wifiFragment"
+            app:popUpTo="@id/wifiStudioFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/otherOneDStudioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.OtherOneDStudioFragment"
+        android:label="OtherOneDStudioFragment" >
+        <action
+            android:id="@+id/action_otherOneDStudioFragment_to_otherFragment"
+            app:destination="@id/otherFragment"
+            app:popUpTo="@id/otherOneDStudioFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.emailFragment,
+                R.id.phoneFragment,
+                R.id.smsFragment,
+                R.id.wifiFragment,
                 R.id.urlFragment,
                 R.id.otherFragment ->
                     binding.bottomNavigation.visibility = View.GONE

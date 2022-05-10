@@ -6,13 +6,14 @@
 
     </data>
 
+
     <LinearLayout
         style="@style/linear_layout_background_style"
         android:weightSum="3"
-        tools:context=".view.detail.UrlFragment">
+        tools:context=".view.detail.SmsFragment">
 
         <ImageView
-            android:id="@+id/url_qr_code_iv"
+            android:id="@+id/sms_qr_code_iv"
             style="@style/qr_code_image_view_style"
             android:layout_weight="2"
             android:contentDescription="@string/qr_code"
@@ -25,24 +26,35 @@
             <Button
                 android:id="@+id/save_btn"
                 style="@style/button_center_style"
+
                 android:text="@string/save_to_gallery" />
 
             <TextView
                 style="@style/text_content_title_style"
-                android:text="@string/url" />
+                android:text="@string/phone_number" />
 
             <TextView
-                android:id="@+id/url_data_tv"
+                android:id="@+id/sms_number_tv"
                 style="@style/data_text_style"
                 android:maxLines="10"
-                tools:text="https://google.com" />
+                tools:text="113" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/message" />
+
+            <TextView
+                android:id="@+id/sms_message_tv"
+                style="@style/data_text_style"
+                android:maxLines="7"
+                tools:text="@tools:sample/lorem/random" />
 
             <Button
-                android:id="@+id/open_url_btn"
+                android:id="@+id/send_sms_btn"
                 style="@style/button_center_style"
-                android:text="@string/open_url" />
+                android:text="@string/send_sms" />
         </LinearLayout>
 
-
     </LinearLayout>
+
 </layout>

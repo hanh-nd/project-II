@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        style="@style/linear_layout_background_style"
+        android:weightSum="3"
+        tools:context=".view.detail.WifiFragment">
+
+        <ImageView
+            android:id="@+id/wifi_qr_code_iv"
+            style="@style/qr_code_image_view_style"
+            android:layout_weight="2"
+            android:contentDescription="@string/qr_code"
+            android:src="@drawable/barcode_default" />
+
+        <LinearLayout
+            style="@style/linear_layout_background_style"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/save_btn"
+                style="@style/button_center_style"
+
+                android:text="@string/save_to_gallery" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/wifi_name" />
+
+            <TextView
+                android:id="@+id/wifi_name_tv"
+                style="@style/data_text_style"
+                android:maxLines="1"
+                tools:text="HUST-TC" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/password" />
+
+            <TextView
+                android:id="@+id/wifi_password_tv"
+                style="@style/data_text_style"
+                android:maxLines="2"
+                tools:text="@tools:sample/lorem/random" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/encryption" />
+
+            <TextView
+                android:id="@+id/wifi_encryption_tv"
+                style="@style/data_text_style"
+                android:maxLines="1"
+                tools:text="WPA" />
+
+            <Button
+                android:id="@+id/copy_wifi_name_btn"
+                style="@style/button_center_style"
+                android:layout_marginVertical="0dp"
+                android:text="@string/copy_wifi_name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/copy_wifi_password_btn"
+                    style="@style/button_center_style"
+                    android:layout_marginVertical="0dp"
+                    android:text="@string/copy_wifi_password" />
+
+                <Button
+                    android:id="@+id/connect_btn"
+                    style="@style/button_center_style"
+                    android:layout_marginVertical="0dp"
+                    android:layout_marginStart="32dp"
+                    android:text="@string/connect" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

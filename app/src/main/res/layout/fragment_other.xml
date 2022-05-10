@@ -16,7 +16,8 @@
             android:id="@+id/text_qr_code_iv"
             style="@style/qr_code_image_view_style"
             android:layout_weight="2"
-            android:contentDescription="@string/qr_code" />
+            android:contentDescription="@string/qr_code"
+            android:src="@drawable/barcode_default" />
 
         <LinearLayout
             style="@style/linear_layout_background_style"

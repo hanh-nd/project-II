@@ -15,9 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import me.hanhngo.qrcode.adapter.ItemClickListener
 import me.hanhngo.qrcode.databinding.FragmentHistoryBinding
 import me.hanhngo.qrcode.domain.BarcodeItem
-import me.hanhngo.qrcode.domain.schema.Email
-import me.hanhngo.qrcode.domain.schema.Other
-import me.hanhngo.qrcode.domain.schema.Url
+import me.hanhngo.qrcode.domain.schema.*
 import me.hanhngo.qrcode.util.parseSchema
 
 @AndroidEntryPoint
@@ -88,6 +86,19 @@ class HistoryFragment : Fragment() {
             is Url -> NavHostFragment.findNavController(this).navigate(
                 HistoryFragmentDirections.actionHistoryFragmentToUrlFragment(schema, format)
             )
+
+            is Phone -> NavHostFragment.findNavController(this).navigate(
+                HistoryFragmentDirections.actionHistoryFragmentToPhoneFragment(schema, format)
+            )
+
+            is Sms -> NavHostFragment.findNavController(this).navigate(
+                HistoryFragmentDirections.actionHistoryFragmentToSmsFragment(schema, format)
+            )
+
+            is Wifi -> NavHostFragment.findNavController(this).navigate(
+                HistoryFragmentDirections.actionHistoryFragmentToWifiFragment(schema, format)
+            )
+
             else -> NavHostFragment.findNavController(this).navigate(
                 HistoryFragmentDirections.actionHistoryFragmentToOtherFragment(
                     schema as Other,

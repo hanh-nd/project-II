@@ -10,21 +10,24 @@ import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import me.hanhngo.qrcode.databinding.FragmentUrlBinding
+import me.hanhngo.qrcode.databinding.FragmentSmsBinding
 import me.hanhngo.qrcode.util.extension.save
 import me.hanhngo.qrcode.util.parseContent
 
-class UrlFragment : Fragment() {
-    private var _binding: FragmentUrlBinding? = null
-    private val binding: FragmentUrlBinding get() = _binding!!
 
-    private val args: UrlFragmentArgs by navArgs()
+class SmsFragment : Fragment() {
+    private var _binding: FragmentSmsBinding? = null
+    private val binding: FragmentSmsBinding get() = _binding!!
+
+    private val args: SmsFragmentArgs by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUrlBinding.inflate(layoutInflater)
+        // Inflate the layout for this fragment
+        _binding = FragmentSmsBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -34,24 +37,11 @@ class UrlFragment : Fragment() {
         setupListener()
     }
 
-    private fun bindUI() {
-        try {
-            val url = args.url
-            val format = args.barcodeFormat
-            val bitmap = parseContent(url.toBarcodeText(), format)
-
-            binding.urlQrCodeIv.setImageBitmap(bitmap)
-            binding.urlDataTv.text = url.url
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
     private fun setupListener() {
-        val url = args.url
+        val sms = args.sms
 
         binding.saveBtn.setOnClickListener {
-            val saveResult = binding.urlQrCodeIv.drawable.toBitmap().save(requireContext())
+            val saveResult = binding.smsQrCodeIv.drawable.toBitmap().save(requireContext())
             Toast.makeText(
                 requireContext(),
                 if (saveResult) "Save to gallery successfully." else "Save to gallery failed. Try again.",
@@ -59,10 +49,25 @@ class UrlFragment : Fragment() {
             ).show()
         }
 
-        binding.openUrlBtn.setOnClickListener {
+        binding.sendSmsBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url.url)
-            startActivity(intent)
+            intent.data = Uri.parse("smsto:${sms.phone}")
+            intent.putExtra("sms_body", sms.message)
+            startActivity(Intent.createChooser(intent, "Choose an app to complete."))
+        }
+    }
+
+    private fun bindUI() {
+        try {
+            val sms = args.sms
+            val format = args.barcodeFormat
+            val bitmap = parseContent(sms.toBarcodeText(), format)
+
+            binding.smsQrCodeIv.setImageBitmap(bitmap)
+            binding.smsNumberTv.text = sms.phone
+            binding.smsMessageTv.text = sms.message
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -70,6 +75,5 @@ class UrlFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

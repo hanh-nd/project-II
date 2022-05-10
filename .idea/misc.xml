@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hanhn/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.2640625" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project I/QRCode/app/src/main/res/layout/activity_main.xml" value="0.2640625" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/drawable/bg_gray_rounded.xml" value="0.212" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/drawable/ic_email.xml" value="0.212" />
@@ -10,13 +11,27 @@
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_camera.xml" value="0.2" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_detail.xml" value="0.17864583333333334" />
-        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_email.xml" value="0.264" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_email.xml" value="0.1" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_email_studio.xml" value="0.2640625" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_history.xml" value="0.264" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_other.xml" value="0.2640625" />
-        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_studio.xml" value="0.1640625" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_other1_d.xml" value="0.2640625" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_other_one_d.xml" value="0.2640625" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_other_one_d_studio.xml" value="0.176" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_phone.xml" value="0.2640625" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_phone_studio.xml" value="0.2" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_sms.xml" value="0.25" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_sms_studio.xml" value="0.32083958020989506" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_studio.xml" value="0.264" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_test.xml" value="0.1" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_text_studio.xml" value="0.264" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_url.xml" value="0.2" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_url_studio.xml" value="0.264" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_wifi.xml" value="0.2640625" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/fragment_wifi_studio.xml" value="0.264" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/item_barcode_row.xml" value="0.4" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/spinner_item.xml" value="0.2640625" />
+        <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/layout/spinner_item_dropdown.xml" value="0.4" />
         <entry key="..\:/Users/hanhn/Desktop/hanh/Slides/20212/Project II/QRCode/app/src/main/res/menu/bottom_navigation.xml" value="0.2640625" />
       </map>
     </option>

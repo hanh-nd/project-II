@@ -12,10 +12,10 @@ class Url(val url: String) : Schema, Parcelable {
         private const val HTTP_PREFIX = "http://"
         private const val HTTPS_PREFIX = "https://"
         private const val WWW_PREFIX = "www."
-        private val PREFIXES = listOf(HTTP_PREFIX, HTTPS_PREFIX, WWW_PREFIX)
+        private val URL_PREFIXES = listOf(HTTP_PREFIX, HTTPS_PREFIX, WWW_PREFIX)
 
         fun parse(text: String): Url? {
-            if (text.startsWithAnyIgnoreCase(PREFIXES).not()) {
+            if (text.startsWithAnyIgnoreCase(URL_PREFIXES).not()) {
                 return null
             }
 
@@ -27,6 +27,7 @@ class Url(val url: String) : Schema, Parcelable {
             return Url(url)
         }
     }
+
 
     override val schema: BarcodeSchema
         get() = BarcodeSchema.URL

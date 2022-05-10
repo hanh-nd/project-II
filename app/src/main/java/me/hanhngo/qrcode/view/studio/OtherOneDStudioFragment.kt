@@ -2,6 +2,8 @@ package me.hanhngo.qrcode.view.studio
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -115,45 +117,63 @@ class OtherOneDStudioFragment : Fragment(), AdapterView.OnItemSelectedListener {
         when (format) {
             BarcodeFormat.AZTEC -> with(binding) {
                 informationTv.text = "Văn bản không có ký tự đặc biệt".addPrefixString("Ghi chú: ")
-
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_TEXT
             }
             BarcodeFormat.CODABAR -> with(binding) {
                 informationTv.text = "Chữ số".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_NUMBER
             }
             BarcodeFormat.CODE_39 -> with(binding) {
                 informationTv.text =
-                    "Văn bản biết hoa không có ký tự đặc biệt".addPrefixString("Ghi chú: ")
+                    "Văn bản viết hoa không có ký tự đặc biệt".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_TEXT
+                otherOneDStudioEt.filters += InputFilter.AllCaps()
             }
             BarcodeFormat.CODE_93 -> with(binding) {
                 informationTv.text =
-                    "Văn bản biết hoa không có ký tự đặc biệt".addPrefixString("Ghi chú: ")
+                    "Văn bản viết hoa không có ký tự đặc biệt".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_TEXT
+                otherOneDStudioEt.filters += InputFilter.AllCaps()
             }
             BarcodeFormat.CODE_128 -> with(binding) {
                 informationTv.text = "Văn bản không có ký tự đặc biệt".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_TEXT
             }
             BarcodeFormat.DATA_MATRIX -> with(binding) {
                 informationTv.text = "Văn bản không có ký tự đặc biệt".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_TEXT
             }
             BarcodeFormat.EAN_8 -> with(binding) {
                 informationTv.text = "8 chữ số".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_NUMBER
+                otherOneDStudioEt.filters += InputFilter.LengthFilter(8)
             }
             BarcodeFormat.EAN_13 -> with(binding) {
                 informationTv.text = "12 chữ số + 1 chữ số tổng".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_NUMBER
+                otherOneDStudioEt.filters += InputFilter.LengthFilter(13)
             }
             BarcodeFormat.ITF -> with(binding) {
                 informationTv.text = "Thậm chí số lượng chữ số".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_TEXT
             }
             BarcodeFormat.PDF_417 -> with(binding) {
                 informationTv.text = "Văn bản".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_TEXT
             }
             BarcodeFormat.QR_CODE -> with(binding) {
                 informationTv.text = "Văn bản".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_TEXT
             }
             BarcodeFormat.UPC_A -> with(binding) {
                 informationTv.text = "11 chữ số + 1 chữ số tổng".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_NUMBER
+                otherOneDStudioEt.filters += InputFilter.LengthFilter(13)
             }
             BarcodeFormat.UPC_E -> with(binding) {
                 informationTv.text = "7 chữ số + 1 chữ số tổng".addPrefixString("Ghi chú: ")
+                otherOneDStudioEt.inputType = InputType.TYPE_CLASS_NUMBER
+                otherOneDStudioEt.filters += InputFilter.LengthFilter(8)
             }
 
             else -> with(binding) {

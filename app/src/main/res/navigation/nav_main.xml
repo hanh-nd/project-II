@@ -214,7 +214,7 @@
     <fragment
         android:id="@+id/otherOneDStudioFragment"
         android:name="me.hanhngo.qrcode.view.studio.OtherOneDStudioFragment"
-        android:label="OtherOneDStudioFragment" >
+        android:label="Other 1D Barcode" >
         <action
             android:id="@+id/action_otherOneDStudioFragment_to_otherFragment"
             app:destination="@id/otherFragment"

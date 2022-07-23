@@ -17,23 +17,30 @@ class Custom(val studentId: String?, val name: String?) : Schema, Parcelable {
         private const val SEPARATOR = ":"
 
         fun parse(text: String): Custom? {
-            val rawText = decode(text)
-            if (rawText.startsWithIgnoreCase(PREFIX).not()) {
+            try {
+                val rawText = decode(text)
+                if (rawText.startsWithIgnoreCase(PREFIX).not()) {
+                    return null
+                }
+
+                val parts = rawText.removePrefixIgnoreCase(PREFIX).split(SEPARATOR)
+
+                return Custom(
+                    studentId = parts.getOrNull(0),
+                    name = parts.getOrNull(1)
+                )
+            } catch (e: Exception) {
+                e.printStackTrace()
                 return null
             }
-
-            val parts = rawText.removePrefixIgnoreCase(PREFIX).split(SEPARATOR)
-
-            return Custom(
-                studentId  = parts.getOrNull(0),
-                name = parts.getOrNull(1)
-            )
         }
     }
 
     override fun toBarcodeText(): String {
-        return encode(PREFIX +
-                studentId.orEmpty() +
-                "$SEPARATOR${name.orEmpty()}")
+        return encode(
+            PREFIX +
+                    studentId.orEmpty() +
+                    "$SEPARATOR${name.orEmpty()}"
+        )
     }
 }

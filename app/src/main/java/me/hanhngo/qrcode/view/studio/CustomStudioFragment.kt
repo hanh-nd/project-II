@@ -47,7 +47,7 @@ class CustomStudioFragment : Fragment() {
                 val customSchema = Custom(studentId, studentName)
 
                 val barcodeEntity = BarcodeEntity(
-                    text = encode(customSchema.toBarcodeText()),
+                    text = customSchema.toBarcodeText(),
                     schema = BarcodeSchema.CUSTOM,
                     date = System.currentTimeMillis(),
                     isGenerated = true,

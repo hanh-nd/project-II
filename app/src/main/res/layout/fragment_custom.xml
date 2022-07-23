@@ -48,10 +48,6 @@
                 android:maxLines="7"
                 tools:text="@tools:sample/lorem/random" />
 
-            <Button
-                android:id="@+id/send_sms_btn"
-                style="@style/button_center_style"
-                android:text="@string/send_sms" />
         </LinearLayout>
 
     </LinearLayout>

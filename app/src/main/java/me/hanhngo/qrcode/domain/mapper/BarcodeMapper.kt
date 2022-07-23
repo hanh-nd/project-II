@@ -11,54 +11,47 @@ fun fromBarcodeEntityToBarcodeItem(barcodeEntity: BarcodeEntity): BarcodeItem {
     val id = barcodeEntity.id
     val content: String
     val resId: Int
-    val dateTime = barcodeEntity.date.toLocalDateTime()
+    val createdDate = barcodeEntity.date.toLocalDateTime()
     val rawValue = barcodeEntity.text
     val format = barcodeEntity.format
 
-    when (barcodeEntity.schema) {
-        BarcodeSchema.EMAIL -> {
-            val email = parseSchema(barcodeEntity.text) as Email
-            content = email.email.toString()
+    when (val schema = parseSchema(barcodeEntity.text)) {
+        is Email -> {
+            content = schema.email.toString()
             resId = R.drawable.ic_email
         }
 
-        BarcodeSchema.PHONE -> {
-            val phone = parseSchema(barcodeEntity.text) as Phone
-            content = phone.phone
+        is Phone -> {
+            content = schema.phone
             resId = R.drawable.ic_phone
         }
 
-        BarcodeSchema.URL -> {
-            val url = parseSchema(barcodeEntity.text) as Url
-            content = url.url
+        is Url -> {
+            content = schema.url
             resId = R.drawable.ic_url
         }
 
-        BarcodeSchema.WIFI -> {
-            val wifi = parseSchema(barcodeEntity.text) as Wifi
-            content = wifi.name.toString()
+        is Wifi -> {
+            content = schema.name.toString()
             resId = R.drawable.ic_wifi
         }
 
-        BarcodeSchema.SMS -> {
-            val sms = parseSchema(barcodeEntity.text) as Sms
-            content = sms.phone.toString()
+        is Sms -> {
+            content = schema.phone.toString()
             resId = R.drawable.ic_sms
         }
 
-        BarcodeSchema.CUSTOM -> {
-            val custom = parseSchema(barcodeEntity.text) as Custom
-            content = custom.studentId.toString()
+        is Custom -> {
+            content = schema.studentId.toString()
             resId = R.drawable.ic_custom
         }
 
-        BarcodeSchema.OTHER -> {
-            val text = parseSchema(barcodeEntity.text) as Other
-            content = text.text
+        else -> {
+            content = (schema as Other).text
             resId = R.drawable.ic_text
         }
     }
-    return BarcodeItem(id, resId, content, dateTime, rawValue, format)
+    return BarcodeItem(id, resId, content, createdDate, rawValue, format)
 }
 
 fun fromBarcodeEntityListToBarcodeItemList(barcodeEntities: List<BarcodeEntity>): List<BarcodeItem> {

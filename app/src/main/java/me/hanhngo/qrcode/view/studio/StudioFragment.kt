@@ -77,8 +77,13 @@ class StudioFragment : Fragment() {
             )
         }
 
+        binding.customCodeTv.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(
+                StudioFragmentDirections.actionStudioFragmentToCustomStudioFragment()
+            )
+        }
+
         binding.clipboardTv.setOnClickListener {
-            println("Hanh: clipboard")
             val clipBoardManager =
                 requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             if (!clipBoardManager.hasPrimaryClip() || !clipBoardManager.primaryClipDescription?.hasMimeType(

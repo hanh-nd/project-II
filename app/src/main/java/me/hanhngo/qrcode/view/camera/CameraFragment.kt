@@ -306,6 +306,10 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
                 CameraFragmentDirections.actionCameraFragmentToWifiFragment(schema, format)
             )
 
+            is Custom -> NavHostFragment.findNavController(this).navigate(
+                CameraFragmentDirections.actionCameraFragmentToCustomFragment(schema, format)
+            )
+
             else -> NavHostFragment.findNavController(this).navigate(
                 CameraFragmentDirections.actionCameraFragmentToOtherFragment(
                     schema as Other,

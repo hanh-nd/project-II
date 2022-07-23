@@ -67,6 +67,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
@@ -80,6 +81,7 @@
                     style="@style/button_center_style"
                     android:layout_marginVertical="0dp"
                     android:layout_marginStart="32dp"
+                    android:visibility="gone"
                     android:text="@string/connect" />
             </LinearLayout>
 

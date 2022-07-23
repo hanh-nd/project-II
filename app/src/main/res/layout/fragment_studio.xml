@@ -76,10 +76,21 @@
             android:weightSum="2">
 
             <TextView
+                android:id="@+id/custom_code_tv"
+                style="@style/studio_item_style"
+                android:text="@string/custom"
+                app:drawableTopCompat="@drawable/ic_custom" />
+
+            <TextView
                 android:id="@+id/clipboard_tv"
                 style="@style/studio_item_style"
                 android:text="@string/clipboard"
                 app:drawableTopCompat="@drawable/ic_clipboard" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginVertical="24dp"
+            android:weightSum="1">
 
             <TextView
                 android:id="@+id/other_1d_tv"

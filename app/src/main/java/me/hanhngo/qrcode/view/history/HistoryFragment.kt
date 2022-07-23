@@ -99,6 +99,10 @@ class HistoryFragment : Fragment() {
                 HistoryFragmentDirections.actionHistoryFragmentToWifiFragment(schema, format)
             )
 
+            is Custom -> NavHostFragment.findNavController(this).navigate(
+                HistoryFragmentDirections.actionHistoryFragmentToCustomFragment(schema, format)
+            )
+
             else -> NavHostFragment.findNavController(this).navigate(
                 HistoryFragmentDirections.actionHistoryFragmentToOtherFragment(
                     schema as Other,

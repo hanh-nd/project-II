@@ -17,12 +17,12 @@ interface BarcodeDao {
     @Query("SELECT * from barcodes")
     fun getAll(): Flow<List<BarcodeEntity>>
 
-    @Query("SELECT * FROM barcodes WHERE isGenerated is 1")
+    @Query("SELECT * FROM barcodes WHERE is_generated is 1")
     fun getGeneratedBarcodes(): Flow<List<BarcodeEntity>>
 
     @Query("SELECT * FROM barcodes WHERE id = :id")
     fun getDetail(id: Long): Flow<BarcodeEntity>
 
     @Query("DELETE FROM barcodes")
-    suspend fun deleteAll()
+    suspend fun deleteAll(): Int
 }

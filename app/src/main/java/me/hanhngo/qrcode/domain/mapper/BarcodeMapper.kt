@@ -46,6 +46,12 @@ fun fromBarcodeEntityToBarcodeItem(barcodeEntity: BarcodeEntity): BarcodeItem {
             resId = R.drawable.ic_sms
         }
 
+        BarcodeSchema.CUSTOM -> {
+            val custom = parseSchema(barcodeEntity.text) as Custom
+            content = custom.studentId.toString()
+            resId = R.drawable.ic_custom
+        }
+
         BarcodeSchema.OTHER -> {
             val text = parseSchema(barcodeEntity.text) as Other
             content = text.text

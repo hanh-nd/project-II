@@ -41,4 +41,7 @@
     <string name="wep">WEP</string>
     <string name="none">None</string>
     <string name="HTTPS">https://</string>
+    <string name="custom">Custom</string>
+    <string name="studentId">Mã số sinh viên</string>
+    <string name="student_name">Tên sinh viên</string>
 </resources>

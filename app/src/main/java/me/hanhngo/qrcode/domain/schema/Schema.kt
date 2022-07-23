@@ -7,6 +7,7 @@ enum class BarcodeSchema {
     SMS,
     URL,
     WIFI,
+    CUSTOM,
     OTHER;
 }
 

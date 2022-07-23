@@ -71,19 +71,18 @@ class WifiFragment : Fragment() {
             Toast.makeText(requireContext(), "Saved to clipboard.", Toast.LENGTH_SHORT).show()
         }
 
-        binding.connectBtn.setOnClickListener {
-            val wifiConfig = WifiConfiguration()
-
-            wifiConfig.SSID = String.format("\"%s\"", wifi.name)
-            wifiConfig.preSharedKey = String.format("\"%s\"", wifi.password)
-
-            val wifiManager = requireActivity().getSystemService(WIFI_SERVICE) as WifiManager?
-            val netId = wifiManager!!.addNetwork(wifiConfig)
-            wifiManager.disconnect()
-            wifiManager.enableNetwork(netId, true)
-            wifiManager.reconnect()
-        }
-
+//        binding.connectBtn.setOnClickListener {
+//            val wifiConfig = WifiConfiguration()
+//
+//            wifiConfig.SSID = String.format("\"%s\"", wifi.name)
+//            wifiConfig.preSharedKey = String.format("\"%s\"", wifi.password)
+//
+//            val wifiManager = requireActivity().getSystemService(WIFI_SERVICE) as WifiManager?
+//            val netId = wifiManager!!.addNetwork(wifiConfig)
+//            wifiManager.disconnect()
+//            wifiManager.enableNetwork(netId, true)
+//            wifiManager.reconnect()
+//        }
     }
 
     private fun bindUI() {

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        style="@style/linear_layout_background_style"
+        android:weightSum="3"
+        tools:context=".view.detail.CustomFragment">
+
+        <ImageView
+            android:id="@+id/custom_qr_code_iv"
+            style="@style/qr_code_image_view_style"
+            android:layout_weight="2"
+            android:contentDescription="@string/qr_code"
+            android:src="@drawable/barcode_default" />
+
+        <LinearLayout
+            style="@style/linear_layout_background_style"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/save_btn"
+                style="@style/button_center_style"
+
+                android:text="@string/save_to_gallery" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/studentId" />
+
+            <TextView
+                android:id="@+id/student_id_tv"
+                style="@style/data_text_style"
+                android:maxLines="10"
+                tools:text="113" />
+
+            <TextView
+                style="@style/text_content_title_style"
+                android:text="@string/student_name" />
+
+            <TextView
+                android:id="@+id/student_name_tv"
+                style="@style/data_text_style"
+                android:maxLines="7"
+                tools:text="@tools:sample/lorem/random" />
+
+            <Button
+                android:id="@+id/send_sms_btn"
+                style="@style/button_center_style"
+                android:text="@string/send_sms" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

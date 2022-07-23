@@ -102,6 +102,7 @@ fun parseContent(content: String, format: BarcodeFormat = BarcodeFormat.QR_CODE)
 fun parseBarcode(barcode: Barcode): BarcodeEntity {
     val schema = parseSchema(barcode.rawValue.toString())
     val format = parseFormat(barcode.format)
+
     return BarcodeEntity(
         text = barcode.rawValue.toString(),
         schema = schema.schema,
@@ -116,6 +117,7 @@ fun parseSchema(text: String): Schema {
         ?: Phone.parse(text)
         ?: Sms.parse(text)
         ?: Wifi.parse(text)
+        ?: Custom.parse(text)
         ?: Other(text)
 }
 

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_cameraFragment_to_smsFragment"
             app:destination="@id/smsFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_customFragment"
+            app:destination="@id/customFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -52,6 +55,9 @@
         <action
             android:id="@+id/action_historyFragment_to_smsFragment"
             app:destination="@id/smsFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_customFragment"
+            app:destination="@id/customFragment" />
     </fragment>
     <fragment
         android:id="@+id/studioFragment"
@@ -82,6 +88,9 @@
         <action
             android:id="@+id/action_studioFragment_to_otherOneDStudioFragment"
             app:destination="@id/otherOneDStudioFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_customStudioFragment"
+            app:destination="@id/customStudioFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailFragment"
@@ -152,6 +161,17 @@
             app:argType="com.google.zxing.BarcodeFormat" />
     </fragment>
     <fragment
+        android:id="@+id/customFragment"
+        android:name="me.hanhngo.qrcode.view.detail.CustomFragment"
+        android:label="Custom Barcode">
+        <argument
+            android:name="custom"
+            app:argType="me.hanhngo.qrcode.domain.schema.Custom" />
+        <argument
+            android:name="barcodeFormat"
+            app:argType="com.google.zxing.BarcodeFormat" />
+    </fragment>
+    <fragment
         android:id="@+id/emailStudioFragment"
         android:name="me.hanhngo.qrcode.view.studio.EmailStudioFragment"
         android:label="Email Studio" >
@@ -214,11 +234,21 @@
     <fragment
         android:id="@+id/otherOneDStudioFragment"
         android:name="me.hanhngo.qrcode.view.studio.OtherOneDStudioFragment"
-        android:label="Other 1D Barcode" >
+        android:label="Other 1D Studio" >
         <action
             android:id="@+id/action_otherOneDStudioFragment_to_otherFragment"
             app:destination="@id/otherFragment"
             app:popUpTo="@id/otherOneDStudioFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/customStudioFragment"
+        android:name="me.hanhngo.qrcode.view.studio.CustomStudioFragment"
+        android:label="Custom Studio" >
+        <action
+            android:id="@+id/action_customStudioFragment_to_customFragment"
+            app:destination="@id/customFragment"
+            app:popUpTo="@id/customStudioFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

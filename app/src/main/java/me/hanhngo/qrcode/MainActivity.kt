@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.phoneFragment,
                 R.id.smsFragment,
                 R.id.wifiFragment,
+                R.id.customFragment,
                 R.id.urlFragment,
                 R.id.otherFragment ->
                     binding.bottomNavigation.visibility = View.GONE

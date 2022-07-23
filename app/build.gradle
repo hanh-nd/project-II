@@ -88,4 +88,7 @@ dependencies {
     // ZXing
     implementation "com.google.zxing:core:$zxing_version"
 
+    // Bcrypt
+    implementation "org.mindrot:jbcrypt:$jbcrypt_version"
+
 }

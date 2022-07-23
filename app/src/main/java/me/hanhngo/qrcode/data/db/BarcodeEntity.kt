@@ -1,6 +1,7 @@
 package me.hanhngo.qrcode.data.db
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -13,9 +14,9 @@ import me.hanhngo.qrcode.domain.schema.BarcodeSchema
 @Parcelize
 data class BarcodeEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val text: String,
+    @ColumnInfo(name = "raw_text") val text: String,
     val schema: BarcodeSchema,
     val date: Long,
-    val isGenerated: Boolean = false,
+    @ColumnInfo(name = "is_generated") val isGenerated: Boolean = false,
     val format: BarcodeFormat,
 ) : Parcelable

@@ -16,10 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
@@ -43,6 +40,7 @@ import me.hanhngo.qrcode.util.parseSchema
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
+import kotlin.math.max
 import kotlin.math.min
 
 @AndroidEntryPoint
@@ -55,6 +53,7 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
     private var cameraSelector: CameraSelector? = null
     private var previewUseCase: Preview? = null
     private var analysisUseCase: ImageAnalysis? = null
+    private var cameraControl: CameraControl? = null
 
     private val lensFacing = CameraSelector.LENS_FACING_BACK
     private val options = BarcodeScannerOptions.Builder()
@@ -68,6 +67,10 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
 
     private val viewModel: CameraViewModel by viewModels()
     private val isProcessingBarcode: AtomicBoolean = AtomicBoolean(false)
+
+    private var isTorchEnabled = false
+    private var zoomRatio = 1f
+
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -121,6 +124,22 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
             pickImageLauncher.launch(intent)
         }
 
+        binding.enableTorchBtn.setOnClickListener {
+            isTorchEnabled = !isTorchEnabled
+            cameraControl?.enableTorch(isTorchEnabled)
+        }
+
+        binding.zoomInBtn.setOnClickListener {
+            zoomRatio = min(8f, zoomRatio * 2)
+            cameraControl?.setZoomRatio(zoomRatio)
+        }
+
+        binding.zoomOutBtn.setOnClickListener {
+            zoomRatio = max(1f, zoomRatio / 2)
+            cameraControl?.setZoomRatio(zoomRatio)
+
+        }
+
         holder = binding.overlay.holder.apply {
             setFormat(PixelFormat.TRANSLUCENT)
             addCallback(this@CameraFragment)
@@ -153,11 +172,11 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
         //Attach the PreviewView surface provider to the preview use case.
         previewUseCase!!.setSurfaceProvider(previewView!!.surfaceProvider)
         try {
-            cameraProvider!!.bindToLifecycle(
+            cameraControl =  cameraProvider!!.bindToLifecycle(
                 this,
                 cameraSelector!!,
                 previewUseCase
-            )
+            ).cameraControl
 
         } catch (illegalStateException: IllegalStateException) {
             println(illegalStateException.message ?: "IllegalStateException")
@@ -377,6 +396,9 @@ class CameraFragment : Fragment(), SurfaceHolder.Callback {
         super.onDestroyView()
         _binding = null
         cameraExecutor.shutdown()
+        cameraControl = null
+        isTorchEnabled = false
+        zoomRatio = 1f
     }
 
     companion object {

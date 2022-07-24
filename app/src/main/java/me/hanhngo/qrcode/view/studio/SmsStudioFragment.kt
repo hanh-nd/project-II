@@ -38,7 +38,7 @@ class SmsStudioFragment : Fragment() {
             createBtn.setOnClickListener {
                 val phoneNumber = smsStudioNumberEt.text.toString()
                 val message = smsStudioMessageEt.text.toString()
-                if (phoneNumber.isPhone().not() && message.isEmpty()) {
+                if (phoneNumber.isPhone().not() || message.isEmpty()) {
                     Toast.makeText(requireContext(), "Invalid phone number or message! Try again!", Toast.LENGTH_SHORT)
                         .show()
                     return@setOnClickListener

@@ -37,9 +37,32 @@
             android:id="@+id/image_choose_btn"
             style="@style/button_center_style"
             android:text="@string/choose_image"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/enable_torch_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/enable_torch_btn"
+            style="@style/button_center_style"
+            android:text="@string/enable_torch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_choose_btn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/zoom_in_btn"
+            style="@style/button_center_style"
+            android:text="@string/zoom_in"
+            app:layout_constraintEnd_toStartOf="@id/zoom_out_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_choose_btn" />
+
+        <Button
+            android:id="@+id/zoom_out_btn"
+            style="@style/button_center_style"
+            android:text="@string/zoom_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/zoom_in_btn"
+            app:layout_constraintTop_toBottomOf="@id/enable_torch_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

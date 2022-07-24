@@ -36,7 +36,7 @@ class WifiStudioFragment : Fragment() {
             createBtn.setOnClickListener {
                 val wifiName = wifiStudioNameEt.text.toString()
                 val wifiPassword = wifiStudioPasswordEt.text.toString()
-                if (wifiName.isEmpty() && wifiPassword.isEmpty()) {
+                if (wifiName.isEmpty() || wifiPassword.isEmpty() || wifiPassword.length < 8) {
                     Toast.makeText(
                         requireContext(),
                         "Invalid wifi name or password! Try again!",

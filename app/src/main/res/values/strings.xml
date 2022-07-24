@@ -42,6 +42,9 @@
     <string name="none">None</string>
     <string name="HTTPS">https://</string>
     <string name="custom">Custom</string>
-    <string name="studentId">Mã số sinh viên</string>
-    <string name="student_name">Tên sinh viên</string>
+    <string name="studentId">Student ID</string>
+    <string name="student_name">Student name</string>
+    <string name="enable_torch">Enable Torch</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
 </resources>
